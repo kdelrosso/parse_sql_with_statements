@@ -44,7 +44,12 @@ class WithStatementParser(object):
         return re.sub('(.*?)--.*', '\\1', text)
 
     def cross_joins(self, query):
-        """Replace shorthand ',' with 'cross join'."""
+        """Replace shorthand ',' with 'cross join'.
+
+        Parameters
+        ----------
+        query: string, containing a SQL query
+        """
 
         # match from or join, space, any text, optional ' as ', optional text,
         # comma, optional space, any text, either space or line end
@@ -82,12 +87,7 @@ class WithStatementParser(object):
         return self.cross_joins(query)
 
     def extract_with_statements(self):
-        """Return a dictionary mapping {'with_statement_name' : 'with statement_query'}.
-
-        Parameters
-        ----------
-        query: string, containing a SQL query
-        """
+        """Return a dictionary mapping {'with_statement_name' : 'with statement_query'}."""
 
         query = self.clean_original_query()
 
@@ -151,6 +151,7 @@ class WithStatementParser(object):
 
     def dependency_alias(self):
         """Construct dependencies and aliases from the WITH statements."""
+
         self.dependencies = {}
         self.aliases = {}
         self.all_aliases = set()
@@ -194,7 +195,6 @@ class WithStatementParser(object):
             for a in arr:
                 G.add_edge(k, a)
 
-        # check for cycles
         return bool(list(nx.simple_cycles(G)))
 
     def get_alias(self, with_table, nested_table):

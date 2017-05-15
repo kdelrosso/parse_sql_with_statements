@@ -1,6 +1,6 @@
 import sys
 from os import path
-sys.path.append(path.dirname(path.dirname(path.abspath(__file__))) + '/code' )
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))) + '/code')
 
 from unittest import TestCase, main
 from parse_sql import WithStatementParser
