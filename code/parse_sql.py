@@ -4,7 +4,7 @@ from collections import defaultdict
 import networkx as nx
 
 
-KEY_WORDS = ['where', 'on', 'group', 'order', 'limit', 'cross', 'join']
+SQL_KEYWORDS = ['where', 'on', 'group', 'order', 'limit', 'cross', 'join']
 MAX_ITERATIONS = 100
 
 class WithStatementParser(object):
@@ -172,7 +172,7 @@ class WithStatementParser(object):
                 # only keep WITH statement table name
                 if t in with_statement_tables:
                     # when no alias exists we'll typically match a SQL key word, which we skip
-                    if a not in KEY_WORDS:
+                    if a not in SQL_KEYWORDS:
                         tmp_aliases[t] = a
                         # keep unique set of all extracted aliases
                         self.all_aliases.add(a)
